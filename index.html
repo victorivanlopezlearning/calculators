@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Porcentaje</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/normalize.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body>
+  <section class="container section calculator">
+    <h1>Desglose de Ganancia</h1>
+
+    <div class="calculator__line"></div>
+
+    <p class="calculator__description">
+      Ingresa tu ganancia mensual para obtener el desglose automático según la distribución recomendada.
+    </p>
+
+    <div class="calculator__formula">
+      <input type="number" id="income" placeholder="0">
+      <span>= Ganancia mensual</span>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown__item">
+        <span class="breakdown__label">40% &mdash; Reinversión</span>
+        <div class="breakdown__result" id="reinversion">0</div>
+      </div>
+      <div class="breakdown__item">
+        <span class="breakdown__label">15% &mdash; Gastos fijos</span>
+        <div class="breakdown__result" id="gastos">0</div>
+      </div>
+      <div class="breakdown__item">
+        <span class="breakdown__label">15% &mdash; Ahorro de emergencia</span>
+        <div class="breakdown__result" id="ahorro">0</div>
+      </div>
+      <div class="breakdown__item">
+        <span class="breakdown__label">30% &mdash; Sueldo</span>
+        <div class="breakdown__result" id="sueldo">0</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section calculator">
+    <h1>Calculadora de Porcentaje</h1>
+
+    <div class="calculator__line"></div>
+
+    <p class="calculator__description">
+      Esta calculadora te permite encontrar el porcentaje de una cantidad específica. Simplemente ingresa el porcentaje
+      que deseas calcular y la cantidad sobre la cual se aplicará ese porcentaje, luego haz clic en "Calcular" para
+      obtener el resultado.
+    </p>
+
+    <div class="calculator__formula">
+      <input type="number" id="percentage" placeholder="0">
+      <span>% de</span>
+      <input type="number" id="amount" placeholder="0">
+      <span>es</span>
+      <div class="calculator__result" id="result">0</div>
+    </div>
+
+    <div class="calculator__buttons">
+      <button class="calculator__clear-btn" id="clearBtn">C</button>
+      <button class="calculator__calc-btn" id="calcBtn">Calcular</button>
+    </div>
+  </section>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
