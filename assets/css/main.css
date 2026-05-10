@@ -186,6 +186,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 10px;
 }
 
 .breakdown__item {
@@ -197,9 +198,29 @@ button {
 }
 
 .breakdown__label {
+  flex: 1;
   font-size: 2rem;
   font-weight: bold;
   color: var(--color-secondary);
+}
+
+.breakdown__pct-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 2rem;
+}
+
+.breakdown__pct-input {
+  width: 90px;
+  border: 2px solid var(--color-secondary);
+  padding: 8px 10px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.breakdown__pct-input--error {
+  border-color: #d6001c;
 }
 
 .breakdown__result {
@@ -211,4 +232,19 @@ button {
   font-size: 2.4rem;
   font-weight: bold;
   background-color: var(--color-accent);
+}
+
+.breakdown__validation {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0 2rem;
+  min-height: 2rem;
+}
+
+.breakdown__validation--error {
+  color: #d6001c;
+}
+
+.breakdown__validation--ok {
+  color: var(--color-secondary);
 }

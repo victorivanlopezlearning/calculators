@@ -52,35 +52,83 @@ clearBtn.addEventListener("click", clearFields);
 
 // --- Breakdown calculator ---
 const incomeInput = document.getElementById("income");
+const breakdownValidation = document.getElementById("breakdown-validation");
 
 const breakdownConfig = [
-  { id: "reinversion", percentage: 40 },
-  { id: "gastos",      percentage: 15 },
-  { id: "ahorro",      percentage: 15 },
-  { id: "sueldo",      percentage: 30 },
+  { id: "reinversion", pctId: "pct-reinversion", defaultPct: 40 },
+  { id: "gastos",      pctId: "pct-gastos",      defaultPct: 10 },
+  { id: "ahorro",      pctId: "pct-ahorro",      defaultPct: 10 },
+  { id: "sueldo",      pctId: "pct-sueldo",      defaultPct: 40 },
 ];
+
+const loadBreakdownPercentages = () => {
+  breakdownConfig.forEach(({ pctId, defaultPct }) => {
+    const stored = localStorage.getItem(pctId);
+    const input = document.getElementById(pctId);
+    input.value = stored !== null ? stored : defaultPct;
+  });
+};
+
+const saveBreakdownPercentages = () => {
+  breakdownConfig.forEach(({ pctId }) => {
+    localStorage.setItem(pctId, document.getElementById(pctId).value);
+  });
+};
+
+loadBreakdownPercentages();
+
+const setBreakdownValidation = (message, type) => {
+  breakdownValidation.textContent = message;
+  breakdownValidation.className = "breakdown__validation" + (type ? ` breakdown__validation--${type}` : "");
+};
 
 const calculateBreakdown = () => {
   const income = getInputValue(incomeInput);
 
-  if (Number.isNaN(income)) {
+  if (Number.isNaN(income) || income < 0) {
+    setBreakdownValidation("Ingresa una ganancia mensual válida.", "error");
     breakdownConfig.forEach(({ id }) => {
-      document.getElementById(id).textContent = "Inválido";
+      document.getElementById(id).textContent = "—";
     });
     return;
   }
 
-  breakdownConfig.forEach(({ id, percentage }) => {
-    document.getElementById(id).textContent = formatNumber((percentage * income) / 100);
+  const percentages = breakdownConfig.map(({ pctId }) => getInputValue(document.getElementById(pctId)));
+
+  if (percentages.some((p) => Number.isNaN(p) || p < 0)) {
+    setBreakdownValidation("Todos los porcentajes deben ser números válidos y no negativos.", "error");
+    return;
+  }
+
+  const total = Math.round(percentages.reduce((a, b) => a + b, 0) * 100) / 100;
+
+  if (total !== 100) {
+    setBreakdownValidation(`Los porcentajes suman ${total}%. Deben sumar exactamente 100%.`, "error");
+    return;
+  }
+
+  setBreakdownValidation("", "ok");
+
+  breakdownConfig.forEach(({ id }, i) => {
+    document.getElementById(id).textContent = formatNumber((percentages[i] * income) / 100);
   });
 };
 
 const clearBreakdown = () => {
   incomeInput.value = "";
-  breakdownConfig.forEach(({ id }) => {
+  breakdownConfig.forEach(({ pctId, defaultPct, id }) => {
+    document.getElementById(pctId).value = defaultPct;
+    localStorage.setItem(pctId, defaultPct);
     document.getElementById(id).textContent = "0";
   });
+  setBreakdownValidation("", "");
   incomeInput.focus();
 };
 
 incomeInput.addEventListener("input", calculateBreakdown);
+breakdownConfig.forEach(({ pctId }) => {
+  document.getElementById(pctId).addEventListener("input", () => {
+    saveBreakdownPercentages();
+    calculateBreakdown();
+  });
+});

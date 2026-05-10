@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora de Porcentaje</title>
+  <title>Calculadoras para Emprendedores</title>
   <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
   <!-- Meta SEO-->
   <meta name="description" content="Calculadora de porcentaje para desglosar ganancias y calcular porcentajes específicos de una cantidad dada.">
@@ -26,32 +26,52 @@
     <div class="calculator__line"></div>
 
     <p class="calculator__description">
-      Ingresa tu ganancia mensual para obtener el desglose automático según la distribución recomendada.
+      Esta calculadora te permite desglosar tu ganancia mensual en diferentes categorías como reinversión, gastos
+      fijos, ahorro de emergencia y sueldo. Ingresa tu ganancia mensual y asigna un porcentaje a cada categoría para
+      ver cómo se distribuye tu dinero.
     </p>
 
     <div class="calculator__formula">
-      <input type="number" id="income" placeholder="0">
+      <input type="number" id="income" placeholder="0" min="0">
       <span>= Ganancia mensual</span>
     </div>
 
     <div class="breakdown">
       <div class="breakdown__item">
-        <span class="breakdown__label">40% &mdash; Reinversión</span>
+        <span class="breakdown__label">Reinversión</span>
+        <div class="breakdown__pct-group">
+          <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100" placeholder="0">
+          <span>%</span>
+        </div>
         <div class="breakdown__result" id="reinversion">0</div>
       </div>
       <div class="breakdown__item">
-        <span class="breakdown__label">15% &mdash; Gastos fijos</span>
+        <span class="breakdown__label">Gastos fijos</span>
+        <div class="breakdown__pct-group">
+          <input type="number" class="breakdown__pct-input" id="pct-gastos" value="0" min="0" max="100" placeholder="0">
+          <span>%</span>
+        </div>
         <div class="breakdown__result" id="gastos">0</div>
       </div>
       <div class="breakdown__item">
-        <span class="breakdown__label">15% &mdash; Ahorro de emergencia</span>
+        <span class="breakdown__label">Ahorro de emergencia</span>
+        <div class="breakdown__pct-group">
+          <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100" placeholder="0">
+          <span>%</span>
+        </div>
         <div class="breakdown__result" id="ahorro">0</div>
       </div>
       <div class="breakdown__item">
-        <span class="breakdown__label">30% &mdash; Sueldo</span>
+        <span class="breakdown__label">Sueldo</span>
+        <div class="breakdown__pct-group">
+          <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100" placeholder="0">
+          <span>%</span>
+        </div>
         <div class="breakdown__result" id="sueldo">0</div>
       </div>
     </div>
+
+    <p class="breakdown__validation" id="breakdown-validation"></p>
   </section>
 
   <section class="container section calculator">
