@@ -21,19 +21,19 @@
 
 <body>
   <section class="container section calculator">
-    <h1>Desglose de Ganancia</h1>
+    <h1>Desglose de Ganancia Neta</h1>
 
     <div class="calculator__line"></div>
 
     <p class="calculator__description">
-      Esta calculadora te permite desglosar tu ganancia mensual en diferentes categorías como reinversión, gastos
-      fijos, ahorro de emergencia y sueldo. Ingresa tu ganancia mensual y asigna un porcentaje a cada categoría para
-      ver cómo se distribuye tu dinero.
+      Esta calculadora te permite desglosar tu ganancia neta mensual en diferentes categorías como reinversión, ahorro
+      de emergencia y sueldo. Ingresa tu ganancia neta mensual y asigna un porcentaje a cada categoría para ver cómo
+      se distribuye tu dinero.
     </p>
 
     <div class="calculator__formula">
       <input type="number" id="income" placeholder="0" min="0">
-      <span>= Ganancia mensual</span>
+      <span>= Ganancia neta mensual</span>
     </div>
 
     <div class="breakdown">
@@ -44,14 +44,6 @@
           <span>%</span>
         </div>
         <div class="breakdown__result" id="reinversion">0</div>
-      </div>
-      <div class="breakdown__item">
-        <span class="breakdown__label">Gastos fijos</span>
-        <div class="breakdown__pct-group">
-          <input type="number" class="breakdown__pct-input" id="pct-gastos" value="0" min="0" max="100" placeholder="0">
-          <span>%</span>
-        </div>
-        <div class="breakdown__result" id="gastos">0</div>
       </div>
       <div class="breakdown__item">
         <span class="breakdown__label">Ahorro de emergencia</span>

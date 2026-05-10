@@ -56,7 +56,6 @@ const breakdownValidation = document.getElementById("breakdown-validation");
 
 const breakdownConfig = [
   { id: "reinversion", pctId: "pct-reinversion", defaultPct: 40 },
-  { id: "gastos",      pctId: "pct-gastos",      defaultPct: 10 },
   { id: "ahorro",      pctId: "pct-ahorro",      defaultPct: 10 },
   { id: "sueldo",      pctId: "pct-sueldo",      defaultPct: 40 },
 ];
