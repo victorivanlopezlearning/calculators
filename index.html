@@ -6,91 +6,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadoras para Emprendedores</title>
   <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
-  <!-- Meta SEO-->
   <meta name="description" content="Calculadora de porcentaje para desglosar ganancias y calcular porcentajes específicos de una cantidad dada.">
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/normalize.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <script>
+    (function () {
+      var s = localStorage.getItem('theme');
+      var dark = s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.dataset.theme = 'dark';
+    })();
+  </script>
 </head>
 
 <body>
-  <section class="container section calculator">
-    <h1>Desglose de Ganancia Neta</h1>
 
-    <div class="calculator__line"></div>
+  <header class="site-header">
+    <h1 class="site-header__title">Calculadoras para Emprendedores</h1>
+    <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
+  </header>
 
-    <p class="calculator__description">
-      Esta calculadora te permite desglosar tu ganancia neta mensual en diferentes categorías como reinversión, ahorro
-      de emergencia y sueldo. Ingresa tu ganancia neta mensual y asigna un porcentaje a cada categoría para ver cómo
-      se distribuye tu dinero.
-    </p>
+  <main class="site-main">
 
-    <div class="calculator__formula">
-      <input type="number" id="income" placeholder="0" min="0">
-      <span>= Ganancia neta mensual</span>
-    </div>
-
-    <div class="breakdown">
-      <div class="breakdown__item">
-        <span class="breakdown__label">Reinversión</span>
-        <div class="breakdown__pct-group">
-          <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100" placeholder="0">
-          <span>%</span>
-        </div>
-        <div class="breakdown__result" id="reinversion">0</div>
+    <section class="calculator">
+      <div class="calculator__header">
+        <span class="calculator__icon">💹</span>
+        <h2 class="calculator__title">Desglose de Ganancia Neta</h2>
       </div>
-      <div class="breakdown__item">
-        <span class="breakdown__label">Ahorro de emergencia</span>
-        <div class="breakdown__pct-group">
-          <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100" placeholder="0">
-          <span>%</span>
+
+      <p class="calculator__description">
+        Distribuye tu ganancia neta mensual entre reinversión, ahorro de emergencia y sueldo.
+        Los porcentajes deben sumar exactamente 100%.
+      </p>
+
+      <div class="calculator__income-wrap">
+        <label class="calculator__label" for="income">Ganancia neta mensual</label>
+        <div class="calculator__prefix-wrap">
+          <span class="calculator__prefix">$</span>
+          <input type="number" id="income" placeholder="0" min="0">
         </div>
-        <div class="breakdown__result" id="ahorro">0</div>
       </div>
-      <div class="breakdown__item">
-        <span class="breakdown__label">Sueldo</span>
-        <div class="breakdown__pct-group">
-          <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100" placeholder="0">
-          <span>%</span>
+
+      <div class="breakdown__bar-wrap">
+        <div class="breakdown__bar" id="breakdown-bar"></div>
+        <div class="breakdown__total" id="breakdown-total"></div>
+      </div>
+
+      <div class="breakdown">
+        <div class="breakdown__item breakdown__item--reinversion">
+          <span class="breakdown__label">🔄 Reinversión</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="reinversion">0</div>
         </div>
-        <div class="breakdown__result" id="sueldo">0</div>
+        <div class="breakdown__item breakdown__item--ahorro">
+          <span class="breakdown__label">🛡️ Ahorro de emergencia</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="ahorro">0</div>
+        </div>
+        <div class="breakdown__item breakdown__item--sueldo">
+          <span class="breakdown__label">💰 Sueldo</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="sueldo">0</div>
+        </div>
       </div>
-    </div>
 
-    <p class="breakdown__validation" id="breakdown-validation"></p>
-  </section>
+      <div class="breakdown__footer">
+        <button class="breakdown__normalize" id="breakdown-normalize">Ajustar al 100%</button>
+        <p class="breakdown__validation" id="breakdown-validation"></p>
+      </div>
+    </section>
 
-  <section class="container section calculator">
-    <h1>Calculadora de Porcentaje</h1>
+    <section class="calculator">
+      <div class="calculator__header">
+        <span class="calculator__icon">🧮</span>
+        <h2 class="calculator__title">Calculadora de Porcentaje</h2>
+      </div>
 
-    <div class="calculator__line"></div>
+      <p class="calculator__description">
+        Ingresa un porcentaje y una cantidad para obtener el resultado.
+      </p>
 
-    <p class="calculator__description">
-      Esta calculadora te permite encontrar el porcentaje de una cantidad específica. Simplemente ingresa el porcentaje
-      que deseas calcular y la cantidad sobre la cual se aplicará ese porcentaje, luego haz clic en "Calcular" para
-      obtener el resultado.
-    </p>
+      <div class="calculator__formula">
+        <input type="number" id="percentage" placeholder="porcentaje">
+        <span class="calculator__formula-sep">% de</span>
+        <input type="number" id="amount" placeholder="cantidad">
+        <span class="calculator__formula-sep">es</span>
+        <div class="calculator__result" id="result">0</div>
+      </div>
 
-    <div class="calculator__formula">
-      <input type="number" id="percentage" placeholder="0">
-      <span>% de</span>
-      <input type="number" id="amount" placeholder="0">
-      <span>es</span>
-      <div class="calculator__result" id="result">0</div>
-    </div>
+      <div class="calculator__buttons">
+        <button class="calculator__clear-btn" id="clearBtn">✕ Limpiar</button>
+      </div>
+    </section>
 
-    <div class="calculator__buttons">
-      <button class="calculator__clear-btn" id="clearBtn">C</button>
-      <button class="calculator__calc-btn" id="calcBtn">Calcular</button>
-    </div>
-  </section>
+  </main>
 
+  <footer class="site-footer">
+    <p>Hecho con ❤️ para emprendedores</p>
+  </footer>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
   <script src="assets/js/main.js"></script>
 </body>
 
