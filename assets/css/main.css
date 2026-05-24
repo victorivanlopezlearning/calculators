@@ -50,6 +50,10 @@
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45), 0 1px 6px rgba(0, 0, 0, 0.25);
   --shadow-btn: 0 4px 14px rgba(0, 0, 0, 0.4);
   --focus-ring: 0 0 0 3px rgba(132, 169, 140, 0.4);
+
+  --color-reinversion: #a8c5af;
+  --color-ahorro: #6b9e94;
+  --color-sueldo: #84a98c;
 }
 
 [data-theme="dark"] input[type="number"]::placeholder {
@@ -344,6 +348,14 @@ input[type="number"]:focus {
   font-variant-numeric: tabular-nums;
   padding: 0.7rem 1.1rem;
   border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--t);
+}
+
+.breakdown__result.is-copied,
+.calculator__result.is-copied {
+  opacity: 0.55;
 }
 
 .breakdown__item--reinversion .breakdown__result {
@@ -422,6 +434,9 @@ input[type="number"]:focus {
   color: var(--color-primary-hover);
   text-align: center;
   letter-spacing: -0.02em;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--t);
 }
 
 
@@ -577,6 +592,18 @@ button:active {
 .breakdown__normalize:hover {
   background: var(--color-secondary);
   color: #fff;
+}
+
+.breakdown__normalize:disabled {
+  border-color: var(--color-text-muted);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.breakdown__normalize:disabled:hover {
+  background: transparent;
+  color: var(--color-text-muted);
 }
 
 .breakdown__validation {

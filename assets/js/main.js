@@ -57,6 +57,7 @@ const incomeInput         = document.getElementById("income");
 const breakdownValidation = document.getElementById("breakdown-validation");
 const breakdownBarEl      = document.getElementById("breakdown-bar");
 const breakdownTotalEl    = document.getElementById("breakdown-total");
+const normalizeBtn        = document.getElementById("breakdown-normalize");
 
 const breakdownConfig = [
   { id: "reinversion", pctId: "pct-reinversion", defaultPct: 40 },
@@ -110,6 +111,7 @@ const renderBreakdownBar = () => {
   breakdownTotalEl.textContent = `Total: ${formatNumber(total)}%`;
   breakdownTotalEl.className = "breakdown__total" +
     (isOk ? " breakdown__total--ok" : total > 0 ? " breakdown__total--error" : "");
+  normalizeBtn.disabled = isOk;
 };
 
 const setBreakdownValidation = (message, type) => {
@@ -184,6 +186,29 @@ breakdownConfig.forEach(({ pctId }) => {
 });
 
 document.getElementById("breakdown-normalize").addEventListener("click", normalizeToHundred);
+
+
+// --- Copy to clipboard ---
+
+const copyToClipboard = async (el) => {
+  const text = el.textContent.trim();
+  if (!text || text === '0' || text === '—' || text === 'Valores inválidos') return;
+  try {
+    await navigator.clipboard.writeText(text);
+    const original = el.textContent;
+    el.textContent = '¡Copiado!';
+    el.classList.add('is-copied');
+    setTimeout(() => {
+      el.textContent = original;
+      el.classList.remove('is-copied');
+    }, 1000);
+  } catch { /* clipboard no disponible */ }
+};
+
+[...document.querySelectorAll('.breakdown__result'), resultBox].forEach(el => {
+  el.setAttribute('title', 'Clic para copiar');
+  el.addEventListener('click', () => copyToClipboard(el));
+});
 
 
 // --- Theme toggle ---
