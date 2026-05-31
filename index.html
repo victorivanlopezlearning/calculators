@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadoras para Emprendedores</title>
+  <title>Calculadoras para Negocios</title>
   <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
   <meta name="description" content="Calculadora de porcentaje para desglosar ganancias y calcular porcentajes específicos de una cantidad dada.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
 <body>
 
   <header class="site-header">
-    <h1 class="site-header__title">Calculadoras para Emprendedores</h1>
+    <h1 class="site-header__title">Calculadoras para Negocios</h1>
     <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
   </header>
 
@@ -32,7 +32,6 @@
 
     <section class="calculator">
       <div class="calculator__header">
-        <span class="calculator__icon">💹</span>
         <h2 class="calculator__title">Desglose de Ganancia Neta</h2>
       </div>
 
@@ -56,7 +55,7 @@
 
       <div class="breakdown">
         <div class="breakdown__item breakdown__item--reinversion">
-          <span class="breakdown__label">🔄 Reinversión</span>
+          <span class="breakdown__label">Reinversión</span>
           <div class="breakdown__pct-group">
             <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100">
             <span class="breakdown__pct-symbol">%</span>
@@ -64,7 +63,7 @@
           <div class="breakdown__result" id="reinversion" aria-live="polite">0</div>
         </div>
         <div class="breakdown__item breakdown__item--ahorro">
-          <span class="breakdown__label">🛡️ Ahorro de emergencia</span>
+          <span class="breakdown__label">Ahorro de emergencia</span>
           <div class="breakdown__pct-group">
             <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100">
             <span class="breakdown__pct-symbol">%</span>
@@ -72,7 +71,7 @@
           <div class="breakdown__result" id="ahorro" aria-live="polite">0</div>
         </div>
         <div class="breakdown__item breakdown__item--sueldo">
-          <span class="breakdown__label">💰 Sueldo</span>
+          <span class="breakdown__label">Sueldo</span>
           <div class="breakdown__pct-group">
             <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100">
             <span class="breakdown__pct-symbol">%</span>
@@ -89,7 +88,6 @@
 
     <section class="calculator">
       <div class="calculator__header">
-        <span class="calculator__icon">🧮</span>
         <h2 class="calculator__title">Calculadora de Porcentaje</h2>
       </div>
 
@@ -98,9 +96,9 @@
       </p>
 
       <div class="calculator__formula">
-        <input type="number" id="percentage" placeholder="porcentaje">
+        <input type="number" id="percentage" placeholder="Porcentaje">
         <span class="calculator__formula-sep">% de</span>
-        <input type="number" id="amount" placeholder="cantidad">
+        <input type="number" id="amount" placeholder="Cantidad">
         <span class="calculator__formula-sep">es</span>
         <div class="calculator__result" id="result" aria-live="polite">0</div>
       </div>
@@ -111,10 +109,6 @@
     </section>
 
   </main>
-
-  <footer class="site-footer">
-    <p>Hecho con ❤️ para emprendedores</p>
-  </footer>
 
   <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
   <script src="assets/js/main.js"></script>
