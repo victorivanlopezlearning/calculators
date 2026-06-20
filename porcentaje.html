@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Porcentaje | Calculadoras para Negocios</title>
+  <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
+  <meta name="description" content="Ingresa un porcentaje y una cantidad para obtener el resultado al instante.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/normalize.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script>
+    (function () {
+      var s = localStorage.getItem('theme');
+      var dark = s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.dataset.theme = 'dark';
+    })();
+  </script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="site-header__top">
+      <h1 class="site-header__title">Calculadoras para Negocios</h1>
+      <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
+    </div>
+    <nav class="site-nav" aria-label="Calculadoras">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Interés Compuesto</a></li>
+        <li><a class="site-nav__link" href="desglose.html">Desglose de Ganancia</a></li>
+        <li><a class="site-nav__link" href="porcentaje.html">Calculadora de %</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main">
+
+    <section class="calculator">
+      <div class="calculator__header">
+        <h2 class="calculator__title">Calculadora de Porcentaje</h2>
+      </div>
+
+      <p class="calculator__description">
+        Ingresa un porcentaje y una cantidad para obtener el resultado.
+      </p>
+
+      <div class="calculator__formula">
+        <input type="number" id="percentage" placeholder="Porcentaje">
+        <span class="calculator__formula-sep">% de</span>
+        <input type="number" id="amount" placeholder="Cantidad">
+        <span class="calculator__formula-sep">es</span>
+        <div class="calculator__result" id="result" aria-live="polite">0</div>
+      </div>
+
+      <div class="calculator__buttons">
+        <button class="calculator__clear-btn" id="clearBtn">✕ Limpiar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/porcentaje.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desglose de Ganancia Neta | Calculadoras para Negocios</title>
+  <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
+  <meta name="description" content="Distribuye tu ganancia neta mensual entre reinversión, ahorro de emergencia y sueldo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/normalize.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script>
+    (function () {
+      var s = localStorage.getItem('theme');
+      var dark = s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.dataset.theme = 'dark';
+    })();
+  </script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="site-header__top">
+      <h1 class="site-header__title">Calculadoras para Negocios</h1>
+      <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
+    </div>
+    <nav class="site-nav" aria-label="Calculadoras">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Interés Compuesto</a></li>
+        <li><a class="site-nav__link" href="desglose.html">Desglose de Ganancia</a></li>
+        <li><a class="site-nav__link" href="porcentaje.html">Calculadora de %</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main">
+
+    <section class="calculator">
+      <div class="calculator__header">
+        <h2 class="calculator__title">Desglose de Ganancia Neta</h2>
+      </div>
+
+      <p class="calculator__description">
+        Distribuye tu ganancia neta mensual entre reinversión, ahorro de emergencia y sueldo.
+        Los porcentajes deben sumar exactamente 100%.
+      </p>
+
+      <div class="calculator__income-wrap">
+        <label class="calculator__label" for="income">Ganancia neta mensual</label>
+        <div class="calculator__prefix-wrap">
+          <span class="calculator__prefix">$</span>
+          <input type="number" id="income" placeholder="0" min="0">
+        </div>
+      </div>
+
+      <div class="breakdown__bar-wrap">
+        <div class="breakdown__bar" id="breakdown-bar"></div>
+        <div class="breakdown__total" id="breakdown-total"></div>
+      </div>
+
+      <div class="breakdown">
+        <div class="breakdown__item breakdown__item--reinversion">
+          <span class="breakdown__label">Reinversión</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="reinversion" aria-live="polite">0</div>
+        </div>
+        <div class="breakdown__item breakdown__item--ahorro">
+          <span class="breakdown__label">Ahorro de emergencia</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="ahorro" aria-live="polite">0</div>
+        </div>
+        <div class="breakdown__item breakdown__item--sueldo">
+          <span class="breakdown__label">Sueldo</span>
+          <div class="breakdown__pct-group">
+            <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100">
+            <span class="breakdown__pct-symbol">%</span>
+          </div>
+          <div class="breakdown__result" id="sueldo" aria-live="polite">0</div>
+        </div>
+      </div>
+
+      <div class="breakdown__footer">
+        <button class="breakdown__normalize" id="breakdown-normalize">Ajustar al 100%</button>
+        <p class="breakdown__validation" id="breakdown-validation"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/breakdown.js"></script>
+</body>
+
+</html>
