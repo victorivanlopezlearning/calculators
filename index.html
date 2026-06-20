@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadoras para Negocios</title>
+  <title>Calculadora de Interés Compuesto | Calculadoras para Negocios</title>
   <link rel="icon" type="image/png" href="assets/img/general/favicon.png" />
-  <meta name="description" content="Calculadora de porcentaje para desglosar ganancias y calcular porcentajes específicos de una cantidad dada.">
+  <meta name="description" content="Proyecta el crecimiento de tu inversión considerando interés compuesto y aportaciones periódicas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
@@ -24,94 +24,156 @@
 <body>
 
   <header class="site-header">
-    <h1 class="site-header__title">Calculadoras para Negocios</h1>
-    <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
+    <div class="site-header__top">
+      <h1 class="site-header__title">Calculadoras para Negocios</h1>
+      <p class="site-header__subtitle">Toma control de tus finanzas con herramientas simples y poderosas</p>
+    </div>
+    <nav class="site-nav" aria-label="Calculadoras">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html">Interés Compuesto</a></li>
+        <li><a class="site-nav__link" href="desglose.html">Desglose de Ganancia</a></li>
+        <li><a class="site-nav__link" href="porcentaje.html">Calculadora de %</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main class="site-main">
 
-    <section class="calculator">
+    <section class="calculator calculator--compound" id="compound">
       <div class="calculator__header">
-        <h2 class="calculator__title">Desglose de Ganancia Neta</h2>
+        <h2 class="calculator__title">Calculadora de Interés Compuesto</h2>
       </div>
-
       <p class="calculator__description">
-        Distribuye tu ganancia neta mensual entre reinversión, ahorro de emergencia y sueldo.
-        Los porcentajes deben sumar exactamente 100%.
+        Proyecta el crecimiento de tu inversión considerando interés compuesto y aportaciones periódicas.
       </p>
 
-      <div class="calculator__income-wrap">
-        <label class="calculator__label" for="income">Ganancia neta mensual</label>
-        <div class="calculator__prefix-wrap">
-          <span class="calculator__prefix">$</span>
-          <input type="number" id="income" placeholder="0" min="0">
-        </div>
-      </div>
-
-      <div class="breakdown__bar-wrap">
-        <div class="breakdown__bar" id="breakdown-bar"></div>
-        <div class="breakdown__total" id="breakdown-total"></div>
-      </div>
-
-      <div class="breakdown">
-        <div class="breakdown__item breakdown__item--reinversion">
-          <span class="breakdown__label">Reinversión</span>
-          <div class="breakdown__pct-group">
-            <input type="number" class="breakdown__pct-input" id="pct-reinversion" value="0" min="0" max="100">
-            <span class="breakdown__pct-symbol">%</span>
+      <div class="compound__layout">
+        <div class="compound__inputs">
+          <div class="compound__field">
+            <label class="calculator__label" for="compound-principal">Depósito inicial</label>
+            <div class="calculator__prefix-wrap">
+              <span class="calculator__prefix">$</span>
+              <input type="number" id="compound-principal" value="" min="0" placeholder="0">
+            </div>
           </div>
-          <div class="breakdown__result" id="reinversion" aria-live="polite">0</div>
-        </div>
-        <div class="breakdown__item breakdown__item--ahorro">
-          <span class="breakdown__label">Ahorro de emergencia</span>
-          <div class="breakdown__pct-group">
-            <input type="number" class="breakdown__pct-input" id="pct-ahorro" value="0" min="0" max="100">
-            <span class="breakdown__pct-symbol">%</span>
+          <div class="compound__field">
+            <label class="calculator__label" for="compound-rate">Tasa de interés anual</label>
+            <div class="calculator__prefix-wrap">
+              <span class="calculator__prefix">%</span>
+              <input type="number" id="compound-rate" value="7" min="0" max="100" step="0.1" placeholder="0">
+            </div>
           </div>
-          <div class="breakdown__result" id="ahorro" aria-live="polite">0</div>
-        </div>
-        <div class="breakdown__item breakdown__item--sueldo">
-          <span class="breakdown__label">Sueldo</span>
-          <div class="breakdown__pct-group">
-            <input type="number" class="breakdown__pct-input" id="pct-sueldo" value="0" min="0" max="100">
-            <span class="breakdown__pct-symbol">%</span>
+          <div class="compound__field">
+            <label class="calculator__label" for="compound-years">Años a invertir</label>
+            <input type="number" id="compound-years" value="10" min="1" max="50" placeholder="10">
           </div>
-          <div class="breakdown__result" id="sueldo" aria-live="polite">0</div>
+          <div class="compound__field">
+            <label class="calculator__label" for="compound-frequency">Frecuencia de interés</label>
+            <select id="compound-frequency" class="compound__select">
+              <option value="1">Anual</option>
+              <option value="12" selected>Mensualmente</option>
+              <option value="24">Quincenal</option>
+              <option value="52">Semanal</option>
+              <option value="365">Diario</option>
+            </select>
+          </div>
+          <div class="compound__field">
+            <label class="calculator__label" for="compound-contribution">Aportaciones adicionales</label>
+            <div class="calculator__prefix-wrap">
+              <span class="calculator__prefix">$</span>
+              <input type="number" id="compound-contribution" value="" min="0" placeholder="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="compound__chart-wrap">
+          <canvas id="compound-chart"></canvas>
         </div>
       </div>
 
-      <div class="breakdown__footer">
-        <button class="breakdown__normalize" id="breakdown-normalize">Ajustar al 100%</button>
-        <p class="breakdown__validation" id="breakdown-validation"></p>
-      </div>
-    </section>
-
-    <section class="calculator">
-      <div class="calculator__header">
-        <h2 class="calculator__title">Calculadora de Porcentaje</h2>
-      </div>
-
-      <p class="calculator__description">
-        Ingresa un porcentaje y una cantidad para obtener el resultado.
-      </p>
-
-      <div class="calculator__formula">
-        <input type="number" id="percentage" placeholder="Porcentaje">
-        <span class="calculator__formula-sep">% de</span>
-        <input type="number" id="amount" placeholder="Cantidad">
-        <span class="calculator__formula-sep">es</span>
-        <div class="calculator__result" id="result" aria-live="polite">0</div>
+      <h3 class="compound__section-title">Resultados</h3>
+      <div class="compound__results">
+        <div class="compound__result-card">
+          <span class="compound__result-label">Depósito inicial</span>
+          <div class="compound__result-value compound__result-value--principal" id="compound-res-principal">$0.00</div>
+        </div>
+        <div class="compound__result-card">
+          <span class="compound__result-label">Depósitos adicionales</span>
+          <div class="compound__result-value compound__result-value--contributions" id="compound-res-contributions">$0.00</div>
+        </div>
+        <div class="compound__result-card">
+          <span class="compound__result-label">Interés acumulado</span>
+          <div class="compound__result-value compound__result-value--interest" id="compound-res-interest">$0.00</div>
+        </div>
+        <div class="compound__result-card">
+          <span class="compound__result-label">Total</span>
+          <div class="compound__result-value compound__result-value--total" id="compound-res-total">$0.00</div>
+        </div>
       </div>
 
-      <div class="calculator__buttons">
-        <button class="calculator__clear-btn" id="clearBtn">✕ Limpiar</button>
+      <h3 class="compound__section-title">Resultados por año</h3>
+      <div class="compound__table-wrap">
+        <table class="compound__table" id="compound-table">
+          <thead>
+            <tr>
+              <th>Años</th>
+              <th>Depósito inicial</th>
+              <th>Depósitos adicionales</th>
+              <th>Interés acumulado</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="compound__faq">
+        <h3 class="compound__section-title">Preguntas frecuentes</h3>
+        <details class="compound__faq-item">
+          <summary class="compound__faq-question">¿Qué es y cómo funciona la frecuencia anual de interés?</summary>
+          <div class="compound__faq-body">
+            <p>Número de veces al año que se agrega el interés al capital (interés compuesto). Ejemplos:</p>
+            <table class="compound__faq-table">
+              <thead>
+                <tr><th>Tipo de interés</th><th>Tiempo</th><th>Repeticiones al año</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Anual</td><td>Genera interés una vez al año.</td><td>1</td></tr>
+                <tr><td>Mensual</td><td>Genera interés cada mes.</td><td>12</td></tr>
+                <tr><td>Quincenal</td><td>Genera interés cada quince días.</td><td>24</td></tr>
+                <tr><td>Semanal</td><td>Genera interés cada 7 días.</td><td>52</td></tr>
+                <tr><td>Diario</td><td>Genera interés cada día.</td><td>365</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details class="compound__faq-item">
+          <summary class="compound__faq-question">¿Cómo funcionan las aportaciones adicionales?</summary>
+          <div class="compound__faq-body">
+            <p>Son depósitos adicionales que se hacen con la misma frecuencia de capitalización. Por ejemplo, con aportaciones de $100:</p>
+            <table class="compound__faq-table">
+              <thead>
+                <tr><th>Tipo de interés</th><th>Tiempo</th><th>Total depositado al año</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Anual</td><td>Genera interés una vez al año.</td><td>1 × $100 = $100 anuales</td></tr>
+                <tr><td>Mensual</td><td>Genera interés cada mes.</td><td>12 × $100 = $1,200 anuales</td></tr>
+                <tr><td>Quincenal</td><td>Genera interés cada quince días.</td><td>24 × $100 = $2,400 anuales</td></tr>
+                <tr><td>Semanal</td><td>Genera interés cada 7 días.</td><td>52 × $100 = $5,200 anuales</td></tr>
+                <tr><td>Diario</td><td>Genera interés cada día.</td><td>365 × $100 = $36,500 anuales</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </section>
 
   </main>
 
   <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
-  <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="assets/js/shared.js"></script>
+  <script src="assets/js/compound.js"></script>
 </body>
 
 </html>
