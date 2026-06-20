@@ -15,7 +15,7 @@ const calculatePercentage = () => {
   }
 
   const pct    = Number.parseFloat(aRaw);
-  const amount = Number.parseFloat(bRaw);
+  const amount = Number.parseFloat(bRaw.replace(/,/g, ''));
 
   if (Number.isNaN(pct) || Number.isNaN(amount)) {
     resultBox.textContent = "Valores inválidos";
@@ -32,9 +32,8 @@ const clearFields = () => {
   percentageInput.focus();
 };
 
-[percentageInput, amountInput].forEach(input => {
-  input.addEventListener("input", calculatePercentage);
-});
+percentageInput.addEventListener("input", calculatePercentage);
+amountInput.addEventListener("input", () => { formatMoneyInput(amountInput); calculatePercentage(); });
 
 clearBtn.addEventListener("click", clearFields);
 

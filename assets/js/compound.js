@@ -117,11 +117,11 @@ const buildCompoundChart = (labels, principalArr, contributionsArr, interestArr)
 };
 
 const calculateCompound = () => {
-  const P   = parseFloat(compoundPrincipalInput.value)    || 0;
-  const r   = (parseFloat(compoundRateInput.value)        || 0) / 100;
-  const t   = Math.max(1, Math.min(50, parseInt(compoundYearsInput.value) || 1));
-  const n   = parseInt(compoundFrequencySelect.value)     || 12;
-  const pmt = parseFloat(compoundContributionInput.value) || 0;
+  const P   = parseFloat(compoundPrincipalInput.value.replace(/,/g, ''))    || 0;
+  const r   = (parseFloat(compoundRateInput.value)                          || 0) / 100;
+  const t   = Math.max(1, Math.min(50, parseInt(compoundYearsInput.value)   || 1));
+  const n   = parseInt(compoundFrequencySelect.value)                       || 12;
+  const pmt = parseFloat(compoundContributionInput.value.replace(/,/g, '')) || 0;
 
   const labels           = [];
   const principalArr     = [];
@@ -159,7 +159,10 @@ const calculateCompound = () => {
   buildCompoundChart(labels, principalArr, contributionsArr, interestArr);
 };
 
-[compoundPrincipalInput, compoundRateInput, compoundYearsInput, compoundContributionInput].forEach(
+[compoundPrincipalInput, compoundContributionInput].forEach((input) => {
+  input.addEventListener("input", () => { formatMoneyInput(input); calculateCompound(); });
+});
+[compoundRateInput, compoundYearsInput].forEach(
   (input) => input.addEventListener("input", calculateCompound)
 );
 compoundFrequencySelect.addEventListener("change", calculateCompound);

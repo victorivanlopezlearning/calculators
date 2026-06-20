@@ -123,7 +123,7 @@ const normalizeToHundred = () => {
 loadBreakdownPercentages();
 renderBreakdownBar();
 
-incomeInput.addEventListener("input", calculateBreakdown);
+incomeInput.addEventListener("input", () => { formatMoneyInput(incomeInput); calculateBreakdown(); });
 breakdownConfig.forEach(({ pctId }) => {
   document.getElementById(pctId).addEventListener("input", () => {
     saveBreakdownPercentages();

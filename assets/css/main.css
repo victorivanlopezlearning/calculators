@@ -56,7 +56,8 @@
   --color-compound-interest: #52b788;
 }
 
-[data-theme="dark"] input[type="number"]::placeholder {
+[data-theme="dark"] input[type="number"]::placeholder,
+[data-theme="dark"] input[type="text"]::placeholder {
   color: rgba(229, 237, 232, 0.25);
 }
 
@@ -209,7 +210,8 @@ input[type="number"] {
 /* ============================================================
    INPUTS (compartido)
    ============================================================ */
-input[type="number"] {
+input[type="number"],
+input[type="text"] {
   background: var(--bg-input);
   border: 2px solid var(--color-secondary);
   border-radius: var(--radius-sm);
@@ -220,11 +222,13 @@ input[type="number"] {
   transition: border-color var(--t), box-shadow var(--t);
 }
 
-input[type="number"]::placeholder {
+input[type="number"]::placeholder,
+input[type="text"]::placeholder {
   color: rgba(17, 24, 39, 0.25);
 }
 
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="text"]:focus {
   outline: none;
   border-color: var(--color-primary-hover);
   box-shadow: var(--focus-ring);
@@ -684,7 +688,8 @@ button:active {
   gap: 0.6rem;
 }
 
-.compound__field input[type="number"] {
+.compound__field input[type="number"],
+.compound__field input[type="text"] {
   width: 100%;
 }
 

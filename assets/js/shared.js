@@ -6,7 +6,48 @@ const formatNumber = (value) =>
     maximumFractionDigits: 2,
   }).format(value);
 
-const getInputValue = (input) => Number.parseFloat(input.value.trim());
+const getInputValue = (input) => Number.parseFloat(input.value.replace(/,/g, '').trim());
+
+const formatMoneyInput = (input) => {
+  const raw    = input.value;
+  const cursor = input.selectionStart;
+
+  let digitsBefore = 0;
+  for (let i = 0; i < cursor; i++) {
+    if (/\d/.test(raw[i])) digitsBefore++;
+  }
+
+  const cleaned = raw.replace(/[^\d.]/g, '').replace(/(\..*?)\..*/g, '$1');
+
+  let formatted;
+  if (cleaned === '') {
+    formatted = '';
+  } else {
+    const dotIndex   = cleaned.indexOf('.');
+    const hasDecimal = dotIndex !== -1;
+    const intStr     = hasDecimal ? cleaned.slice(0, dotIndex) : cleaned;
+    const decStr     = hasDecimal ? cleaned.slice(dotIndex + 1) : '';
+    const intNum     = intStr === '' ? 0 : parseInt(intStr, 10);
+    const intFmt     = intStr === ''
+      ? '0'
+      : new Intl.NumberFormat('es-MX', { maximumFractionDigits: 0 }).format(intNum);
+    formatted = hasDecimal ? intFmt + '.' + decStr : intFmt;
+  }
+
+  input.value = formatted;
+
+  let newPos = 0;
+  let count  = 0;
+  for (let i = 0; i < formatted.length; i++) {
+    if (/\d/.test(formatted[i])) {
+      count++;
+      if (count === digitsBefore) { newPos = i + 1; break; }
+    }
+  }
+  if (digitsBefore > 0 && count < digitsBefore) newPos = formatted.length;
+
+  input.setSelectionRange(newPos, newPos);
+};
 
 
 // --- Copy to clipboard ---
