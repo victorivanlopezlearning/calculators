@@ -12,6 +12,17 @@ const breakdownConfig = [
   { id: "sueldo",      pctId: "pct-sueldo",      defaultPct: 40 },
 ];
 
+const SESSION_INCOME = "breakdown_income";
+
+const saveIncomeState = () => {
+  sessionStorage.setItem(SESSION_INCOME, incomeInput.value);
+};
+
+const restoreIncomeState = () => {
+  const income = sessionStorage.getItem(SESSION_INCOME);
+  if (income !== null) incomeInput.value = income;
+};
+
 const loadBreakdownPercentages = () => {
   breakdownConfig.forEach(({ pctId, defaultPct }) => {
     const stored = localStorage.getItem(pctId);
@@ -122,8 +133,10 @@ const normalizeToHundred = () => {
 
 loadBreakdownPercentages();
 renderBreakdownBar();
+restoreIncomeState();
+calculateBreakdown();
 
-incomeInput.addEventListener("input", () => { formatMoneyInput(incomeInput); calculateBreakdown(); });
+incomeInput.addEventListener("input", () => { formatMoneyInput(incomeInput); saveIncomeState(); calculateBreakdown(); });
 breakdownConfig.forEach(({ pctId }) => {
   document.getElementById(pctId).addEventListener("input", () => {
     saveBreakdownPercentages();
